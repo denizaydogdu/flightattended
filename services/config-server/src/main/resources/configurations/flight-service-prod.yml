@@ -4,8 +4,9 @@ server:
 spring:
   application:
     name: flight-service
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/flight_db
+    url: jdbc:postgresql://postgresql:5432/flight_db
     username: postgres
     password: secret
     driver-class-name: org.postgresql.Driver
@@ -20,12 +21,19 @@ spring:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: none  # Prevents Hibernate from overriding schema.sql
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
         format_sql: true
 
-  sql:
-    init:
-      mode: always # Ensures schema.sql and data.sql are always loaded
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8761/eureka
+
+
+management:
+  metrics:
+    binders:
+      system: false
